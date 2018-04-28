@@ -42,6 +42,7 @@ module.exports = {
             })
             .catch(err => res.status(400).send(err))
     },
+    
     update(req, res) {
         return User
             .findById(req.params.user_id, {

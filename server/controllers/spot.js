@@ -12,20 +12,21 @@ module.exports = {
             .then(spot => res.status(201).send(spot))
             .catch(err => res.status(400).send(err))
     },
-    freeSpots(req, res) {
+    getFreeSpots(req, res) {
         return Spot
             .findAll({
                 where: {
-                    occupency: true
+                    occupency: false
                 },
             })
             .then(spot => {
                 if (!spot) {
-                    return res.status(200).send({
+                    return res.status(404).send({
                         message: "There is no free spot"
                     });
                 }
-                res.send(200).send(spot)
+                console.log(spot)
+                res.status(200).send(spot)
             })
             .catch(err => res.status(400).send(err))
     },
@@ -33,7 +34,7 @@ module.exports = {
         return Spot
             .find({
                 where: {
-                    spot_id: req.params.spot_id,
+                    id: req.params.spot_id,
                     user_id: req.params.user_id,
                 },
             })
@@ -49,11 +50,12 @@ module.exports = {
                         floor: req.body.floor,
                         occupency: req.body.occupency,
                         updatedAt: new Date(),
+                        user_id: req.params.user_id,
                     })
                     .then(spot => res.status(200).send(spot))
-                    .catch(err => res.send(400).send(err))
+                    .catch(err => res.status(400).send(err))
             })
-            .catch(err => res.send(400).send(err))
+            .catch(err => res.status(400).send(err))
     },
     destroy(req, res) {
         return Spot

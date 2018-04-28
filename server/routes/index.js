@@ -1,5 +1,5 @@
 const userController = require("../controllers").user
-const spotControllerspotController = require("../controllers").spot
+const spotController = require("../controllers").spot
 
 module.exports = (app) => {
     app.get('/api', (req, res) => re.status(200).send({
@@ -12,8 +12,20 @@ module.exports = (app) => {
     app.put('/api/user/:user_id', userController.update)
     app.delete('/api/user/:user_id', userController.destroy)
 
-    app.get('/api/spots/free', spotController.freeSpots)
-    app.put('/api/spot/:spot_id/:user_id', spotController.update)
+    app.get('/api/spot/free', spotController.getFreeSpots)
+    app.put('/api/spot/:spot_id/user/:user_id', spotController.update)
     app.post('/api/spot/:user_id', spotController.create)
-    app.delete('/api/spot/:spot_id/:user_id', spotController.destroy)
+    app.delete('/api/spot/:spot_id/user/:user_id', spotController.destroy)
+
+    app.all('/api/user/:user_id/spot', (req, res) =>
+        res.status(405).send({
+            message: 'Method Not Allowed',
+        })
+    )
+
+    app.all('/api/spot/:spot_id/user', (req, res) =>
+        res.status(405).send({
+            message: 'Method Not Allowed',
+        })
+    )
 }
