@@ -7,7 +7,7 @@ module.exports = (app) => {
     }))
 
     app.get('/api/users', userController.list)
-    app.get('/api/user/:user_id', userController.retrieve)
+    app.get('/api/user/:user_id', userController.getUser)
     app.post('/api/user', userController.create)
     app.put('/api/user/:user_id', userController.update)
     app.delete('/api/user/:user_id', userController.destroy)
@@ -15,7 +15,7 @@ module.exports = (app) => {
     app.get('/api/spot/free', spotController.getFreeSpots)
     app.put('/api/spot/:spot_id/user/:user_id', spotController.update)
     app.post('/api/spot/:user_id', spotController.create)
-    app.delete('/api/spot/:spot_id/user/:user_id', spotController.destroy)
+    app.delete('/api/spot/:spot_id', spotController.destroy)
 
     app.all('/api/user/:user_id/spot', (req, res) =>
         res.status(405).send({

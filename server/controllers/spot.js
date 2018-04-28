@@ -50,7 +50,6 @@ module.exports = {
                         floor: req.body.floor,
                         occupency: req.body.occupency,
                         updatedAt: new Date(),
-                        user_id: req.params.user_id,
                     })
                     .then(spot => res.status(200).send(spot))
                     .catch(err => res.status(400).send(err))
@@ -59,12 +58,7 @@ module.exports = {
     },
     destroy(req, res) {
         return Spot
-            .find({
-                where: {
-                    id: req.params.spot_id,
-                    user_id: req.params.user_id,
-                },
-            })
+            .findById(req.params.spot_id)
             .then(spot => {
                 if (!spot) {
                     return res.status(404).send({
