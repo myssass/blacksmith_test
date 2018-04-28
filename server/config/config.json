@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "blacksmith",
+    "password": "blacksmith",
+    "database": "blacksmith_studio_dev",
+    "host": "127.0.0.1",
+    "port":5434,
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "blacksmith",
+    "password": "blacksmith",
+    "database": "blacksmith_studio_test",
+    "host": "127.0.0.1",
+    "port":5434,
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "blacksmith",
+    "password": "blacksmith",
+    "database": "blacksmith_studio",
+    "host": "127.0.0.1",
+    "port":5434,
+    "dialect": "postgres"
+  }
+}
